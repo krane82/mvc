@@ -23,7 +23,8 @@ foreach ($data['tasks'] as $task) {
     print '<td>' . $task['user_name'] . '</td>';
     print '<td>' . $task['user_email'] . '</td>';
     print '<td class="description">' . $task['description'] . '</td>';
-    print '<td><img src='.ROOT.'images'.DS.$task['photo_path'] . '></td>';
+        //здеся поменяй рут на урл
+           print '<td><img src='.ROOT.'images'.DS.$task['photo_path'] . '></td>';
     print '<td class="status">' . $task['status'] . '</td>';
     if($data['admin']==true) {
        print '<td><button type="button" class="btn btn-xs btn-info editBut" value="'.$task['id'].'" data-toggle="modal" data-target="#modalWindow">Edit</button></td>';
