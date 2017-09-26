@@ -8,7 +8,7 @@
  */
 class View
 {
-public function render($filename,$data=false,$return=false)
+public function render($filename,$data=false)
 {
     if($data) {
         extract($data);
@@ -16,7 +16,6 @@ public function render($filename,$data=false,$return=false)
     ob_start();
     include_once (ROOT.'views'.DS.$filename.'.php');
     $content = ob_get_clean();
-    if($return)return $content;
     echo $content;
 }
 }

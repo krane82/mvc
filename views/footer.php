@@ -3,10 +3,25 @@
 <script>
     $('.editBut').click(function()
     {
-        $('#editTask').find("input[name=id]").val($(this).val());
-        $('#editTask').find("textarea[name=description]").val($(this).parent().siblings('.description').html());
+        var form=$('#editTask');
         var status=$(this).parent().siblings('.status').html();
-        $('#editTask').find("input[name=status][value="+status+"]").attr('checked', true);
+        console.log(status);
+        form.find("input[name=id]").val($(this).val());
+        form.find("textarea[name=description]").val($(this).parent().siblings('.description').html());
+        form.find("input[name=status]").attr('checked', false);
+        form.find("input[name=status][value="+status+"]").attr('checked', true);
+    });
+    $('#preview').click(function()
+    {
+       var data=$('#newTask').serialize();
+                $.ajax({
+            type: "POST",
+            url: '<?php echo HOST . '/main/preview' ?>',
+            data: data,
+            success: function (response) {
+                $('#previewBlock').html(response);
+            }
+        });
     });
 </script>
 </body>

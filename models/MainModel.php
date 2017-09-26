@@ -77,9 +77,4 @@ public function savePhoto($arr)
             move_uploaded_file($input,$output);
         }
     }
-    public function images($item)
-    {
-        $model=new MainModel();
-        $model->getPhoto($item);
-    }
 }

@@ -18,19 +18,18 @@ include_once (ROOT.'views'.DS.'sidebar.php');
     </thead>
         <tbody>
     <?php
-foreach ($data['tasks'] as $task) {
-    print '<tr>';
-    print '<td>' . $task['user_name'] . '</td>';
-    print '<td>' . $task['user_email'] . '</td>';
-    print '<td class="description">' . $task['description'] . '</td>';
-    print '<td><img src='.ROOT.'images'.DS.$task['photo_path'] . '></td>';
-    print '<td class="status">' . $task['status'] . '</td>';
-    if($data['admin']==true) {
-       print '<td><button type="button" class="btn btn-xs btn-info editBut" value="'.$task['id'].'" data-toggle="modal" data-target="#modalWindow">Edit</button></td>';
-    }
-    print '</tr>';
-}
-?>
+foreach ($data['tasks'] as $task) :?>
+    <tr>
+    <td><?php print $task['user_name']?></td>
+    <td><?php print $task['user_email']?></td>
+    <td class="description"><?php $task['description']?></td>
+    <td><img src='<?php print HOST.'/images/'.$task['photo_path'] ?>'></td>
+    <td class="status"><?php print $task['status']?></td>
+    <?php if($data['admin']==true) :?>
+       <td><button type="button" class="btn btn-xs btn-info editBut" value="<?php print $task['id']?>" data-toggle="modal" data-target="#modalWindow">Edit</button></td>
+    <?php endif ?>
+    </tr>
+<?php endforeach ?>
         </tbody>
     </table>
 </div>
@@ -40,27 +39,22 @@ foreach ($data['tasks'] as $task) {
 <div class="col-lg-4 col-sm-4 col-xs-4 text-center">
             <?php
     $i=1;
-while($i<=$data['pages'])
-{
-    if($i==$data['activePage'])
-    {
-        print '<button class="btn btn-sm btn-default" disabled style="margin:5px">' . $i . '</button>';
-    }
-    else
-    {
-        print '<a class="btn btn-sm btn-info" style="margin:5px" href="/main?page=' . $i . '">' . $i . '</a>';
+while($i<=$data['pages']) :?>
+   <?php  if($i==$data['activePage']) :?>
+        <button class="btn btn-sm btn-default" disabled style="margin:5px"><?php print $i ?></button>
+    <?php else :?>
+        <a class="btn btn-sm btn-info" style="margin:5px" href="/main?page=<?php print $i ?>"><?php print $i ?></a>
 
-    }
-    $i++;
-}
-?>
+    <?php endif ?>
+    <?php $i++; ?>
+<?php endwhile ?>
 </div>
             <div class="modal fade" id="modalWindow"  tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="exampleModalLabel">Edit kask: </h4>
+                            <h4 class="modal-title">Edit kask: </h4>
                         </div>
                         <form id="editTask" action="<?php echo HOST?>/main/edit"; method="post">
                             <div class="modal-body">

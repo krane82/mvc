@@ -48,7 +48,7 @@ public function action_save()
     if($_FILES['photo']['tmp_name'])
     {
         $model->savePhoto($_FILES['photo']);
-        $photo='images'.DS.$_FILES['photo']['name'];
+        $photo=$_FILES['photo']['name'];
     }
     if($model->saveTask($user,$email,$description,$photo))
     {
@@ -59,4 +59,9 @@ public function action_save()
         header('location:'.$_SERVER['HTTP_REFERER']);
     }
 }
+    public function action_preview()
+    {
+    $data=$_POST;
+    $this->view->render('preview', $data);
+    }
 }
